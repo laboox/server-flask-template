@@ -16,7 +16,9 @@ test_controller = Blueprint('test', __name__)
 def myPrompts():
     req_data = request.get_json()
 
-    return jsonify(current_user)
+    user = User.objects.get(id=current_user.id)
+
+    return jsonify(user)
 
 #example if a public endpoint with parameter
 @test_controller.route('/<urlparam>/submit', methods=['POST'])

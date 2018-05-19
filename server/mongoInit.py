@@ -6,7 +6,7 @@ if __name__ == '__main__':
 
     client = MongoClient('localhost', 27017)
 
-    db = client.savoring
+    db = client.servertest
 
     db.role.update({'name': 'admin'}, {'name': 'admin'}, upsert=True)
     superId = db.role.find_one({'name': 'admin'})['_id']
