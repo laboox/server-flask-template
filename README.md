@@ -14,7 +14,7 @@ A very simple real life template using Flask and MongoDB.
 
 **Table of Contents**
 
-#Directory tree
+# Directory tree
 
 ``` bash
 ├── server-flask-template/
