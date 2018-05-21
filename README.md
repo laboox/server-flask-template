@@ -14,7 +14,9 @@ A very simple real life template using Flask and MongoDB.
 
 **Table of Contents**
 
-<!---[TOCM]--->
+<!---
+[TOCM]
+--->
 
 [TOC]
 
