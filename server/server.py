@@ -7,6 +7,8 @@ from .core import db, security
 from flask_cors import CORS
 from flask_mongoengine import MongoEngine
 from flask_security import MongoEngineUserDatastore
+from http import HTTPStatus
+from mongoengine import NotUniqueError
 
 app = Flask(__name__)
 
@@ -30,6 +32,27 @@ def home():
 def apply_headers(response):
     response.headers["Content-Type"] = "application/json"
     return response
+
+@app.cli.command()
+def initdb():
+    Role.objects(name='admin').update(name='super-admin', upsert=True)
+    superId = Role.objects.get(name='admin')
+    Role.objects(name='user').update(name='user', upsert=True)
+    userId = Role.objects.get(name='user')
+
+    User.objects(email='admin').update(email='admin', roles= [superId, gpId, \
+            userId], password='myBigSuperAdmin', upsert=True)
+
+@app.errorhandler(Exception)
+def handle_error(e):
+    code = 500
+    if isinstance(e, HTTPException):
+        code = e.code
+    if isinstance(e, NotUniqueError):
+        code = HTTPStatus.CONFLICT
+    return jsonify(error=str(e)), code
+
+
 
 if __name__ == '__main__':
     if(os.environ['SERVER_PROD']!=None):

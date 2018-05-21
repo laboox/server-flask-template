@@ -14,8 +14,6 @@ test_controller = Blueprint('test', __name__)
 @auth_token_required
 @roles_required('user')
 def myPrompts():
-    req_data = request.get_json()
-
     user = User.objects.get(id=current_user.id)
 
     return jsonify(user)
