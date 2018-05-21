@@ -14,10 +14,6 @@ A very simple real life template using Flask and MongoDB.
 
 **Table of Contents**
 
-<!---
-[TOCM]
---->
-
 [TOC]
 
 #Directory tree
