@@ -53,7 +53,6 @@ def handle_error(e):
     return jsonify(error=str(e)), code
 
 
-
 if __name__ == '__main__':
     if(os.environ['SERVER_PROD']!=None):
         app.run(host='0.0.0.0', port=80)
