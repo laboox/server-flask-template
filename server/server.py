@@ -35,12 +35,12 @@ def apply_headers(response):
 
 @app.cli.command()
 def initdb():
-    Role.objects(name='admin').update(name='super-admin', upsert=True)
+    Role.objects(name='admin').update(name='admin', upsert=True)
     superId = Role.objects.get(name='admin')
     Role.objects(name='user').update(name='user', upsert=True)
     userId = Role.objects.get(name='user')
 
-    User.objects(email='admin').update(email='admin', roles= [superId, gpId, \
+    User.objects(email='admin').update(email='admin', roles= [superId, \
             userId], password='myBigSuperAdmin', upsert=True)
 
 @app.errorhandler(Exception)
