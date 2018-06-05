@@ -35,7 +35,7 @@ def login():
 
     user = User.objects.get_or_404(email=email)
     if(user.password != password):
-        abort(HTTPStatus.BAD_REQUEST)
+        return jsonify(error='wronge email or password'), HTTPStatus.BAD_REQUEST
     
     login_user(user)
 

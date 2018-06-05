@@ -1,6 +1,6 @@
 
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from .controllers import *
 from .models import *
 from .core import db, security
@@ -8,7 +8,9 @@ from flask_cors import CORS
 from flask_mongoengine import MongoEngine
 from flask_security import MongoEngineUserDatastore
 from http import HTTPStatus
+from werkzeug.exceptions import HTTPException
 from mongoengine import NotUniqueError
+import traceback, sys
 
 app = Flask(__name__)
 
@@ -48,8 +50,12 @@ def handle_error(e):
     code = 500
     if isinstance(e, HTTPException):
         code = e.code
-    if isinstance(e, NotUniqueError):
+    elif isinstance(e, NotUniqueError):
         code = HTTPStatus.CONFLICT
+    else:
+        ex_type, ex, tb = sys.exc_info()
+        traceback.print_tb(tb)
+        print(e)
     return jsonify(error=str(e)), code
 
 
