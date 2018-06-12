@@ -1,11 +1,13 @@
 
 **Features**
 
-- Using MongoDB through flask-mongoengine
-- Authentication and authorization through flask-security
+- Simple [Flask](http://flask.pocoo.org/) API server
 - Avoid any confusing and complex python or flask tricks
 - Flexible API structure
 - Good booster for researches
+
+- Using MongoDB through [flask-mongoengine](https://github.com/MongoEngine/flask-mongoengine)
+- Authentication and authorization through [flask-security](https://pythonhosted.org/Flask-Security/)
 
 # Simple Flask Server Template
 A very simple real life template using Flask and MongoDB.

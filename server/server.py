@@ -11,6 +11,7 @@ from http import HTTPStatus
 from werkzeug.exceptions import HTTPException
 from mongoengine import NotUniqueError
 import traceback, sys
+from getpass import getpass
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ security.init_app(app, user_datastore)
 app.register_blueprint(auth_controller, url_prefix='/api/auth')
 app.register_blueprint(test_controller, url_prefix='/api/test')
 
-@app.route('/hello')
+@app.route('/api/hello', methods=['GET'])
 def home():
     return jsonify({'message': 'Hello'})
 
@@ -42,8 +43,10 @@ def initdb():
     Role.objects(name='user').update(name='user', upsert=True)
     userId = Role.objects.get(name='user')
 
+    adminPassword = getpass('Enter a password for your admin account: ')
+
     User.objects(email='admin').update(email='admin', roles= [superId, \
-            userId], password='myBigSuperAdmin', upsert=True)
+            userId], password=adminPassword, upsert=True)
 
 @app.errorhandler(Exception)
 def handle_error(e):
@@ -60,7 +63,4 @@ def handle_error(e):
 
 
 if __name__ == '__main__':
-    if(os.environ['SERVER_PROD']!=None):
-        app.run(host='0.0.0.0', port=80)
-    else:
-        app.run()
+    app.run()

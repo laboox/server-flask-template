@@ -23,5 +23,5 @@ def myPrompts():
 def submitPrompt(urlparam):
     req_data = request.get_json()
 
-    return jsonify({'param1': urlparam, 'param2': req_data['bodyparam']})
+    return jsonify({'url_param': urlparam, 'body_param': req_data['param']})
 

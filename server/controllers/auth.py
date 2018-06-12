@@ -13,8 +13,12 @@ def register():
     
     email = req_data['email']
     password = req_data['password']
-    first_name = req_data['first_name']
-    last_name = req_data['last_name']
+    first_name = None
+    last_name = None
+    if ('first_name' in req_data):
+        first_name = req_data['first_name']
+    if ('last_name' in req_data):
+        last_name = req_data['last_name']
 
     userRole = Role.objects.get(name="user")
     u = User(first_name=first_name, last_name=last_name, email=email, \
@@ -22,7 +26,7 @@ def register():
     try:
         u.save()
     except NotUniqueError:
-        abort(HTTPStatus.CONFLICT)
+        return jsonify(error='Email address in use'), HTTPStatus.CONFLICT
 
     return jsonify(u)
 
