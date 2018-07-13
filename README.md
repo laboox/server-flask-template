@@ -38,4 +38,18 @@ A very simple real life template using Flask and MongoDB.
 ├── setup.cfg
 └── .gitignore
 ```
+# Installation
 
+To install server package permanently write this in project's root:
+``` bash
+sudo python3 setup.py install
+```
+Or to install as development server write: 
+``` bash
+sudo python3 setup.py develop
+```
+Or if you want to use flask debug mode and just install dependencies try: 
+``` bash
+sudo pip install -e .
+```
+To learn more about deploying flask applications and debug servers read [here](http://flask.pocoo.org/docs/1.0/deploying/).
