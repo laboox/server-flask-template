@@ -13,14 +13,14 @@ test_controller = Blueprint('test', __name__)
 @test_controller.route('/myprivatestuff', methods=['GET'])
 @auth_token_required
 @roles_required('user')
-def myPrompts():
+def myPrivate():
     user = User.objects.get(id=current_user.id)
 
     return jsonify(user)
 
 #example if a public endpoint with parameter
 @test_controller.route('/<urlparam>/submit', methods=['POST'])
-def submitPrompt(urlparam):
+def submitPublic(urlparam):
     req_data = request.get_json()
 
     return jsonify({'url_param': urlparam, 'body_param': req_data['param']})

@@ -6,4 +6,3 @@ from flask_security import Security
 db = MongoEngine()
 
 security = Security()
-

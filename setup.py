@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from distutils.core import setup
 
 setup(
@@ -8,7 +8,7 @@ setup(
     author='Sina Labbaf',
     author_email='slabbaf@uci.edu',
     url='',
-    packages=['server'],
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.4",
@@ -18,4 +18,9 @@ setup(
         'flask_mongoengine',
         'flask_cors'
         ],
+    extras_require={
+        'test': [
+            'pytest'
+        ]
+    }
     )
